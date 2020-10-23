@@ -107,7 +107,7 @@ func TestSSHAccess(t *testing.T) {
 
 		// tfvars
 		Vars: map[string]interface{}{
-			"gcp_project_id": projectID,
+			"google_project": projectID,
 			"instance_name":  randomValidGcpName,
 			"bucket_name":    randomValidGcpName,
 			"zone":           zone,
