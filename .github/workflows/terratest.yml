@@ -1,5 +1,11 @@
 name: run-terratest
-on: push
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   run-test:
@@ -22,4 +28,4 @@ jobs:
         export GOOGLE_PROJECT="${{ secrets.GCP_PROJECT_ID }}"
     - name: run-tests
       run: |
-        cd test && go test -v -run TestTerraformGcpExample
+        cd test && go test -v -run TestTerraformExample
