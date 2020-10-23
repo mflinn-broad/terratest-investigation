@@ -4,7 +4,7 @@ This is a simple terra form module which create a GCE VM instance and GCS bucket
 It is intended to be used just for a demonstration of a sample automated infrasture  
 testing workflow using [terratest](https://terratest.gruntwork.io/)
 
-To break the automated tests make a pr with the instance or bucket name hard coded  
+To break the automated tests make a pr with the  bucket name hard coded  
 rather than using a variable
 
 This documentation is generated with [terraform-docs](https://github.com/segmentio/terraform-docs)

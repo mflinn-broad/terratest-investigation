@@ -19,6 +19,11 @@ All of the following are supported in the automated testing framework:
 - Running shell commands
 
 ## Demo Workflow
+
+### Examples
+- [Example successful workflow](https://github.com/mflinn-broad/terratest-investigation/pull/3)
+- [Example failed workflow](https://github.com/mflinn-broad/terratest-investigation/pull/4)
+
 This repo incorporates a basic github actions workflow which will run the automated infrastructure
 tests on prs to `master` and a passing test is required before merging.
 
