@@ -15,7 +15,7 @@
 
 resource "google_compute_instance" "test_vm" {
   project      = var.google_project
-  name         = var.instance_name
+  name         = "this-will-fail"
   machine_type = var.machine_type
   zone         = var.zone
 
