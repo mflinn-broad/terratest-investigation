@@ -1,5 +1,5 @@
 output "instance_name" {
-  value = google_compute_instnace.test_vm.name
+  value = google_compute_instance.test_vm.name
 }
 
 output "public_up" {
