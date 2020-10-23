@@ -6,20 +6,21 @@ import (
 	"testing"
 	"time"
 
+	"github.com/gruntwork-io/terratest/modules/ssh"
+
 	"github.com/gruntwork-io/terratest/modules/retry"
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/gruntwork-io/terratest/modules/terraform"
-
 	"github.com/gruntwork-io/terratest/modules/gcp"
 	"github.com/gruntwork-io/terratest/modules/random"
+	"github.com/gruntwork-io/terratest/modules/terraform"
 
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 )
 
 func TestTerraformExample(t *testing.T) {
-
+	t.Parallel()
 	exampleDir := test_structure.CopyTerraformFolderToTemp(t, "../", "example")
 
 	// get project id
@@ -86,6 +87,67 @@ func TestTerraformExample(t *testing.T) {
 		if actualText != expectedText {
 			return "", fmt.Errorf("Expected GetLabelsForComputeInstanceE to return '%s' but got '%s'", expectedText, actualText)
 		}
+		return "", nil
+	})
+}
+
+func TestSSHAccess(t *testing.T) {
+	t.Parallel()
+
+	exampleDir := test_structure.CopyTerraformFolderToTemp(t, "../", "example")
+
+	projectID := gcp.GetGoogleProjectIDFromEnvVar(t)
+	randomValidGcpName := gcp.RandomValidGcpName()
+
+	// according to docs framework has issue with asia-east2 so exclude it
+	zone := gcp.GetRandomZone(t, projectID, nil, nil, []string{"asia-east2"})
+
+	terraformOptions := &terraform.Options{
+		TerraformDir: exampleDir,
+
+		// tfvars
+		Vars: map[string]interface{}{
+			"gcp_project_id": projectID,
+			"instance_name":  randomValidGcpName,
+			"bucket_name":    randomValidGcpName,
+			"zone":           zone,
+		},
+	}
+
+	defer terraform.Destroy(t, terraformOptions)
+
+	terraform.InitAndApply(t, terraformOptions)
+
+	// get pubIp for test instance
+	publicIp := terraform.Output(t, terraformOptions, "public_ip")
+
+	instance := gcp.FetchInstance(t, projectID, randomValidGcpName)
+
+	testMessage := "Hello World"
+	sshUsername := "terratest"
+
+	keyPair := ssh.GenerateRSAKeyPair(t, 2048)
+	instance.AddSshKey(t, sshUsername, keyPair.PublicKey)
+
+	host := ssh.Host{
+		Hostname:    publicIp,
+		SshKeyPair:  keyPair,
+		SshUserName: sshUsername,
+	}
+
+	maxRetries := 20
+	sleepBetweenRetries := 3 * time.Second
+
+	retry.DoWithRetry(t, "Attempting to SSH", maxRetries, sleepBetweenRetries, func() (string, error) {
+		output, err := ssh.CheckSshCommandE(t, host, fmt.Sprintf("echo '%s'", testMessage))
+		if err != nil {
+			return "", err
+		}
+
+		if strings.TrimSpace(testMessage) != strings.TrimSpace(output) {
+			return "", fmt.Errorf("Expected: %s. Got: %s\n", testMessage, output)
+		}
+
 		return "", nil
 	})
 }
