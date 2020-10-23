@@ -18,7 +18,7 @@ import (
 	test_structure "github.com/gruntwork-io/terratest/modules/test-structure"
 )
 
-func TestTerraformGcpExample(t *testing.T) {
+func TestTerraformExample(t *testing.T) {
 
 	exampleDir := test_structure.CopyTerraformFolderToTemp(t, "../", "example")
 
