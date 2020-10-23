@@ -34,6 +34,9 @@ The automated test performs a "clean apply" of the example module on each run me
 an empty tfstate. This helps to catch interdependencies preventing clean applies that can occur when building up a module
 with iterative applies. 
 
+The tests will spin up real infrastructure and make assertions about it rather than just checking terraform state.
+For example this workflow will test the ability to ssh to GCE VM created by the example module and run a basic shell command
+
 Go's `defer` functionality is used to ensure that even in the case of unexpected failures, all infrastructure that is created
 by the tests will be cleaned up, or in other words `terraform destroy` will always run at the end of each test run
 
