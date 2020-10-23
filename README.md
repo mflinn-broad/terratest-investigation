@@ -37,3 +37,5 @@ and it must pass before you are allowed to merge
 
 To see an example of a failed test run open a pr where you hardcode the name parameter on either the GCE VM or GCS bucket rather 
 using a variable
+
+The test currently takes about 5 minutes to run so there may be a bit of a wait
