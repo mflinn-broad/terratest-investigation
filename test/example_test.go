@@ -10,8 +10,6 @@ import (
 
 	"github.com/gruntwork-io/terratest/modules/retry"
 
-	"github.com/stretchr/testify/assert"
-
 	"github.com/gruntwork-io/terratest/modules/gcp"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
@@ -54,11 +52,8 @@ func TestTerraformExample(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	// get output values
-	bucketURL := terraform.Output(t, terraformOptions, "bucket_url")
+	_ = terraform.Output(t, terraformOptions, "bucket_url")
 	instanceName := terraform.Output(t, terraformOptions, "instance_name")
-
-	expectedURL := fmt.Sprintf("gs://%s", expectedBucketName)
-	assert.Equal(t, expectedURL, bucketURL)
 
 	// assert storage bucket exists
 	gcp.AssertStorageBucketExists(t, expectedBucketName)
