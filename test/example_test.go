@@ -52,7 +52,6 @@ func TestTerraformExample(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	// get output values
-	_ = terraform.Output(t, terraformOptions, "bucket_url")
 	instanceName := terraform.Output(t, terraformOptions, "instance_name")
 
 	// assert storage bucket exists
