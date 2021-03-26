@@ -12,7 +12,8 @@
  * `terraform-docs markdown --no-sort . > README.md`
  */
 
-// hEllo everybody!!!!
+// I did it! Now let me Pass!
+// "Men are consumed by their desires, untill theres hardly any man left"
 
 resource "google_compute_instance" "test_vm" {
   project      = var.google_project
