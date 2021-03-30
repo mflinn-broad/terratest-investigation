@@ -6,7 +6,7 @@ variable "google_project" {
 variable "instance_name" {
   type        = string
   description = "name of gcp vm instance"
-  default     = "terratest-example"
+  default     = "terra-workflow"
 }
 
 variable "machine_type" {
