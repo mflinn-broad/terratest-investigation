@@ -36,6 +36,8 @@ resource "google_storage_bucket" "test_bucket" {
   project  = var.google_project
   name     = var.bucket_name
   location = var.bucket_location
+  uniform_bucket_level_access = true
+
 }
 
 terraform {
