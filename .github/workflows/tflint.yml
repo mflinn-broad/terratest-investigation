@@ -1,0 +1,16 @@
+name: run-tflint
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  run-tflint:
+    name: Run tflint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+   
