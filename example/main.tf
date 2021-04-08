@@ -34,7 +34,7 @@ resource "google_compute_instance" "test_vm" {
 }
 
 resource "google_storage_bucket" "test_bucket" {    
-  proect  = var.google_project
+  protect  = var.google_project
   name     = var.bucket_name
   location = var.bucket_location
 
@@ -44,5 +44,5 @@ resource "google_storage_bucket" "test_bucket" {
 
 
 terraform {
-  required_vrsion = ">= 0.12.26"
+  required_version = ">= 0.12.26"
 }
