@@ -34,7 +34,7 @@ resource "google_compute_instance" "test_vm" {
 
 resource "google_storage_bucket" "test_bucket" {
   project  = var.google_project
-  name     = var.bucket_name
+  name     = "always-fail"
   location = var.bucket_location
   uniform_bucket_level_access = true
 
