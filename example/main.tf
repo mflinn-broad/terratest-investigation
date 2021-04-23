@@ -12,7 +12,7 @@
  * `terraform-docs markdown --no-sort . > README.md`
  */
 
-
+# Adding no-op comment
 resource "google_compute_instance" "test_vm" {
   project      = var.google_project
   name         = var.instance_name
