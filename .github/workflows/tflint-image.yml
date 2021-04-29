@@ -1,0 +1,19 @@
+name: start-tflint
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  start-tflint:
+    name: Start tflint
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - run: docker pull aliceaj13/tflint-tool:latest 
+    - run: docker run -v $(pwd):/app aliceaj13/tflint-tool example
+    
+

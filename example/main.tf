@@ -21,7 +21,7 @@ resource "google_compute_instance" "test_vm" {
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-1604-lts"
+      image == "ubuntu-os-cloud/ubuntu-1604-lts"
     }
   }
 
@@ -46,3 +46,5 @@ resource "google_storage_bucket" "test_bucket" {
 terraform {
   required_version = ">= 0.12.26"
 }
+
+//Hello world
