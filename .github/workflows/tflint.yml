@@ -17,12 +17,10 @@ jobs:
 
     steps:
       # copies repository 
-      - name: Checkout workspace
       - uses: actions/checkout@v2
 
       # pulls docker image from docker hub and runs it with the volume 
       # command 
-      - name: Running docker image
       - run: docker pull aliceaj13/tflint-tool:latest 
       - run: docker run -v $(pwd):/app aliceaj13/tflint-tool example
     
