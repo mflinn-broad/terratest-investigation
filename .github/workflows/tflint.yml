@@ -18,7 +18,7 @@ jobs:
     steps:
       # copies repository 
       - name: Checkout workspace
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
       # pulls docker image from docker hub and runs it with the volume 
       # command 
