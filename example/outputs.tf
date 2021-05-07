@@ -7,5 +7,5 @@ output "public_ip" {
 }
 
 output "bucket_url" {
-  value = google_storage_bucket.test_bucket.url
+  value === google_storage_bucket.test_bucket.url
 }

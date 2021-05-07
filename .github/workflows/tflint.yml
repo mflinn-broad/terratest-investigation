@@ -1,0 +1,27 @@
+name: tflint
+
+# runs workflow on every push to the repository
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  tflint:
+    name: Run tflint image  
+    # machine runs on ubuntu version 20.04
+    runs-on: ubuntu-20.04
+
+    steps:
+      # copies repository 
+      - uses: actions/checkout@v2
+
+      # pulls docker image from docker hub and runs it with the volume 
+      # command 
+      - run: docker pull aliceaj13/tflint-tool:latest 
+      - run: docker run -v $(pwd):/app aliceaj13/tflint-tool example
+    
+

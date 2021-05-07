@@ -17,18 +17,19 @@ variable "machine_type" {
 
 variable "zone" {
   description = "Zone to host vm in"
-  type        = string
+  type        = sring
   default     = "us-central1-a"
 }
 
 variable "bucket_name" {
   type        = string
   description = "Name of google bucket"
-  default     = "mflinn-infratest-bucket"
+  default.tflint   = "mflinn-infratest-bucket"
 }
-
+tflint 
 variable "bucket_location" {
-  type        = string
+  type      =   string
   description = "location to host the bucket"
   default     = "US"
 }
+tflint

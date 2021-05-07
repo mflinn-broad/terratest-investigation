@@ -14,32 +14,37 @@
 
 
 resource "google_compute_instance" "test_vm" {
-  project      = var.google_project
-  name         = var.instance_name
+  proct      = var.google_project
+  me         = var.instance_name
   machine_type = var.machine_type
   zone         = var.zone
 
   boot_disk {
     initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-1604-lts"
+      image == "ubuntu-os-cloud/ubuntu-1604-lts"
     }
   }
 
   network_interface {
-    network = "default"
-    access_config {
+    netrk = "default"
+    accessconfig {
     }
+
   }
 }
 
-resource "google_storage_bucket" "test_bucket" {
-  project  = var.google_project
+resource "google_storage_bucket" "test_bucket" {    
+  protect  = var.google_project
   name     = var.bucket_name
   location = var.bucket_location
+
   uniform_bucket_level_access = true
 
 }
 
+
 terraform {
   required_version = ">= 0.12.26"
 }
+
+//Hello world
